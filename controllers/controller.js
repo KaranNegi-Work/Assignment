@@ -15,20 +15,21 @@ const employeeController = {
 
 //Controller of Create Employee Data API
 async function createNewEmployee(req, res) {
-        try{
-   const valid= await newEmployeeValidationSchema.validateAsync(req.body);
-   console.log(valid.type);
-   const result =await employeeDao.createNewEmployee(req.body);
-   if(result == null){
-    res.status(404).send("Country with the specified ID does not exists");    
-   }
-   else{
-    res.status(201).json({result});
-   }
-    
-}catch(err){
-    return res.status(422).json({ err: err.message });
-}
+    try {
+        const valid = await newEmployeeValidationSchema.validateAsync(req.body);
+
+        const result = await employeeDao.createNewEmployee(req.body);
+        if (result == null) {
+            res.status(404).send("Country with the specified ID does not exists");
+        }
+        else {
+            res.status(201).json({ result });
+        }
+
+
+    } catch (err) {
+        return res.status(422).json({ err: err.message });
+    }
 
 
 }
@@ -36,39 +37,38 @@ async function createNewEmployee(req, res) {
 //Controller of Update Employee Data API
 async function updateEmployeeData(req, res) {
     try {
-        try{
+
         //Checking Data is Valid with constrains on not
         await updateEmployeeDataValidationSchema.validateAsync(req.body);
         const id = req.params.id;
+
         const result = await employeeDao.updateEmployeeData(id, req.body)
-                //employeeData = [1] i.e Employee Data is updated
-                if (_.first(result) == 1) {
-                    return res.status(200).send("Employee Detail is updated");
-                }
-                //employeeData = [1] i.e Employee Data is updated
-                else if (_.first(result) == 0) {
-                    return res
-                        .status(404)
-                        .send('employee with the specified ID does not exists');
-                }
-                /*
-                if we got emloyeeData = null then it means user has given wrong Country 
-                that is not present in out country table
-                */
-                return res
-                    .status(404)
-                    .send('Country does not exists');
-           
+        //employeeData = [1] i.e Employee Data is updated
+        if (_.first(result) == 1) {
+            return res.status(200).send("Employee Detail is updated");
+        }
+        //employeeData = [1] i.e Employee Data is updated
+        else if (_.first(result) == 0) {
+            return res
+                .status(404)
+                .send('employee with the specified ID does not exists');
+        }
+        /*
+        if we got emloyeeData = null then it means user has given wrong Country 
+        that is not present in out country table
+        */
+        return res
+            .status(404)
+            .send('Country does not exists');
+
+
     } catch (err) {
         return res.status(422).json({ err: err.message });
-        }
-    }catch(err){
-            return res.status(500).json({err: err.message});
-        }
-    
-
-
+    }
 }
+
+
+
 
 //Controller of Finding All Employees Data who are Active API
 async function findActiveEmployees(req, res) {
