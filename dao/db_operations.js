@@ -62,7 +62,7 @@ async function updateEmployeeData(id, data) {
     else {
         const result = await mdlCountry.findByPk(reqCountry);
         if (result != null){
-            const updatedResult = mdlEmployee.update({
+            const updatedResult = await mdlEmployee.update({
                 employee_name: data.employee_name,
                 gender: data.gender,
                 address_1: data.address_1,

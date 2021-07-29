@@ -15,7 +15,6 @@ const employeeController = {
 
 //Controller of Create Employee Data API
 async function createNewEmployee(req, res) {
-    try{
         try{
    const valid= await newEmployeeValidationSchema.validateAsync(req.body);
    console.log(valid.type);
@@ -28,13 +27,9 @@ async function createNewEmployee(req, res) {
    }
     
 }catch(err){
-
     return res.status(422).json({ err: err.message });
- 
 }
-}catch(err){
-    return res.status(500).json({err: err.message});
-}
+
 
 }
 
@@ -47,12 +42,11 @@ async function updateEmployeeData(req, res) {
         const id = req.params.id;
         const result = await employeeDao.updateEmployeeData(id, req.body)
                 //employeeData = [1] i.e Employee Data is updated
-                if (_.first(result) === 1) {
-                    return res.status(200).json({ employeeData }).send("Employee Detail is updated");
+                if (_.first(result) == 1) {
+                    return res.status(200).send("Employee Detail is updated");
                 }
-
                 //employeeData = [1] i.e Employee Data is updated
-                else if (_.first(result) === 0) {
+                else if (_.first(result) == 0) {
                     return res
                         .status(404)
                         .send('employee with the specified ID does not exists');
