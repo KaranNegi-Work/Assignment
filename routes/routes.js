@@ -1,10 +1,11 @@
 const express = require('express');
 const employeeController =require('../controllers/controller');
 const router =express.Router();
+const {validateForNew , validateForUpdate} = require('../validation/validator');
 console.log("Routes file");
 
 //Create new Employee
-router.post('/',employeeController.createNewEmployee);
+router.post('/', validateForNew() ,employeeController.createNewEmployee);
 
 //fetch all active employees
 router.get('/',employeeController.findActiveEmployees);
@@ -16,7 +17,7 @@ router.get('/:id', employeeController.findByPk);
 router.delete('/:id', employeeController.deleteById)
 
 //update the employee details
-router.put('/:id', employeeController.updateEmployeeData);
+router.put('/:id',validateForUpdate() ,employeeController.updateEmployeeData);
 
 
 

@@ -1,6 +1,5 @@
 const employeeDao = require('../dao/db_operations');
-const { newEmployeeValidationSchema, updateEmployeeDataValidationSchema } = require('../validation/validator');
-
+const { Joi } = require('joi');
 var _ = require('lodash');
 
 const employeeController = {
@@ -16,9 +15,9 @@ const employeeController = {
 //Controller of Create Employee Data API
 async function createNewEmployee(req, res) {
     try {
-        const valid = await newEmployeeValidationSchema.validateAsync(req.body);
 
         const result = await employeeDao.createNewEmployee(req.body);
+        
         if (result == null) {
             res.status(404).send("Country with the specified ID does not exists");
         }
@@ -28,7 +27,9 @@ async function createNewEmployee(req, res) {
 
 
     } catch (err) {
-        return res.status(422).json({ err: err.message });
+
+        return res.status(500).json({ err: err.message });
+
     }
 
 
@@ -38,8 +39,6 @@ async function createNewEmployee(req, res) {
 async function updateEmployeeData(req, res) {
     try {
 
-        //Checking Data is Valid with constrains on not
-        await updateEmployeeDataValidationSchema.validateAsync(req.body);
         const id = req.params.id;
 
         const result = await employeeDao.updateEmployeeData(id, req.body)
@@ -63,7 +62,7 @@ async function updateEmployeeData(req, res) {
 
 
     } catch (err) {
-        return res.status(422).json({ err: err.message });
+        return res.status(500).json({ err: err.message });
     }
 }
 

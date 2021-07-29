@@ -12,6 +12,7 @@ const employeeDao = {
 }
 
 async function createNewEmployee(data) {
+    
     const reqCountry = data.country;
     const result = await mdlCountry.findByPk(reqCountry);
     if (result != null){
