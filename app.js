@@ -7,11 +7,11 @@ const routes = require('./routes/routes');
 const app = express();
 const PORT = process.env.PORT;
 
-sequelize.authenticate().then(() => {
-    console.log('Database connected...');
-}).catch(err => {
-    console.log('Error: ' + err);
-})
+// sequelize.authenticate().then(() => {
+//     //console.log('Database connected...');
+// }).catch(err => {
+//     console.log('Error: ' + err);
+// })
 
 sequelize.sync().then(result => {
     
@@ -20,11 +20,15 @@ sequelize.sync().then(result => {
 
     app.use(utils.baseURL, routes);
     
-    app.use('*', (req, res) => { res.status(404).json('Page not found') });
+    app.use('*', (req, res) => { res.sendStatus(404).json('Page not found') });
 
     app.listen(PORT, () => {
-        console.log("\nlistning At port number 3000");
+      //  console.log("\nlistning At port number 3000");
     });
 }).catch(err => {
-    console.log(err);
+   // console.log(err);
 });
+
+module.exports ={
+    app
+}

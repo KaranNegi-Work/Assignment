@@ -29,7 +29,7 @@ async function createNewEmployee(data) {
             updatedAt: new Date(),
         }
         );
-        console.log(crtResult);
+       
     return crtResult;
     }
 return result;

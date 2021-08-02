@@ -8,21 +8,24 @@ module.exports =
     "password": DB_PASSWORD,
     "database": DATABASE,
     "host": DB_HOST,
-    "dialect": DIALECT
+    "dialect": DIALECT,
+    "logging": false
   },
   "test": {
     "username": DB_USERNAME,
     "password": DB_PASSWORD,
     "database": DATABASE,
     "host": DB_HOST,
-    "dialect": DIALECT
+    "dialect": DIALECT,
+    "logging": false
   },
   "production": {
     "username": DB_USERNAME,
     "password": DB_PASSWORD,
     "database": DATABASE,
     "host": DB_HOST,
-    "dialect": DIALECT
+    "dialect": DIALECT,
+    "logging": false
   }
 }
 
