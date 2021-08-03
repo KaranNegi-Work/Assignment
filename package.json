@@ -6,6 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "node app.js",
+    "test m": "npx sequelize db:migrate --env test",
+    "test s": "npx sequelize db:seed:all --env test",
     "migrate up": "npx sequelize-cli db:migrate all",
     "migrate down": "npx sequelize-cli db:migrate:undo all"
   },

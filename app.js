@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const { sequelize } = require('./models');
 const utils = require('./util/utils');
 const routes = require('./routes/routes');
@@ -12,8 +11,9 @@ const PORT = process.env.PORT;
 // }).catch(err => {
 //     console.log('Error: ' + err);
 // })
-
-sequelize.sync().then(result => {
+process.env.NODE_ENV ='test'
+ sequelize.sync();
+//sequelize.sync().then(result => {
     
     //Api Called 
     app.use(express.json());
@@ -25,9 +25,9 @@ sequelize.sync().then(result => {
     app.listen(PORT, () => {
       //  console.log("\nlistning At port number 3000");
     });
-}).catch(err => {
-   // console.log(err);
-});
+// }).catch(err => {
+//    // console.log(err);
+// });
 
 module.exports ={
     app

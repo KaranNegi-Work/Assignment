@@ -66,9 +66,6 @@ async function updateEmployeeData(req, res) {
     }
 }
 
-
-
-
 //Controller of Finding All Employees Data who are Active API
 async function findActiveEmployees(req, res) {
 
@@ -78,7 +75,7 @@ async function findActiveEmployees(req, res) {
             if (!_.isEmpty(data)) {
                 return res.status(200).json({ data });
             }
-            return res.sendStatus(403).send("No data Available");
+            return res.sendStatus(404).send("No data Available");
 
         }).catch(err => {
             res.status(500).json({ error: error.message });
